@@ -1,0 +1,53 @@
+@import url('https://fonts.googleapis.com/css2?family=Nerko+One&display=swap');
+
+* {
+    box-sizing: border-box;
+    border:1px yellow solid
+  }
+
+body { color:rgb(108, 39, 39);
+       font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+       background-color:bisque;
+       margin: 20px 15px;
+       background-image: url(gordon.jpg);
+       background-repeat: no-repeat;
+       background-size:cover; /*taustakuvan leveys */
+       background-attachment:fixed; /* kiinnittää taustakuvan */
+}
+
+main {width:90%;
+      max-width:1200px;
+      margin:auto;
+      background-color:rgba(237, 239, 227, 0.815);
+      padding: 20px;
+      border:rgb(108, 39, 39) solid 2px;
+    }
+
+h1 {font-family: 'Nerko One', cursive;
+    color:rgb(196, 91, 5);
+    font-size:5vw;
+}
+#ekakuva {width: 100%;
+    max-width: 800px;
+   }
+figure {text-align: center;}
+
+.pallot img {width: 30%;
+            max-width: 350px;
+            border-radius: 50%; /* pyöristää reunat */
+            border: 2px grey solid; /* reunus */
+            padding: 5px; /* tyhjä tila kuvan ja reunuksen välissä */
+            background-color: white; /*taustaväri*/
+            box-shadow:-5px 5px 5px black; /*heittovarjo*/
+            margin: 10px; 
+}
+
+@media (max-width:835px){
+    .pallot img {margin: 5px; }
+}
+
+@media (max-width:500px){
+    .pallot img {width:100%;
+        max-width: 450px;}
+
+}
