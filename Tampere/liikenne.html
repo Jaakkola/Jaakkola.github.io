@@ -19,14 +19,14 @@
   <a href="index.html">Sää</a>
   <a href="tampere.html">Tapahtumat</a>
   <a href="liikenne.html" class="active">Liikennekamerakuvat</a>
-  <a href="aikataulu">Juna-aikataulu</a>
+  <a href="aikataulu.html">Juna-aikataulu</a>
   <a href="javascript:void(0);" class="icon" onclick="myFunction()">
     <i class="fa fa-bars"></i>
   </a>
 </div>
 
 <div style="padding-left:16px">
-  <h1>Autolla Tampereslle</h1>
+  <h1>Autolla Tampereelle</h1>
   <p>Minkälainen keli siellä on?</p>
 </div>
 
@@ -34,8 +34,9 @@
         
 <script>
     /* länsiväylä 51, kehä 3 50, turuntie 1, vanha turuntie 110 */
+  
  
- fetch('https://tie.digitraffic.fi/api/v1/data/camera-data')
+ fetch('https://tie.digitraffic.fi/api/weathercam/v1/stations/C04507/data')
 
 // Muunnetaan vastaus JSON muotoon
  .then(function (response) {
@@ -60,9 +61,12 @@ console.log(json);
    function kuvat(data){
 var teksti = ""; 
 
-for(var i = 0; i < data.cameraStations.length; i++) { 
+for(var i = 0; i < data.presets.length; i++) { 
 //teksti = teksti + data.cameraStations[i].id;
-var asema = data.cameraStations[i];
+var kamera = i+ " " +data.presets[i].id;
+teksti = teksti + "<h3>" + data.presets[i].measuredTime + "</h3>";
+teksti = teksti + "<img class=kamerat src=https://weathercam.digitraffic.fi/" + data.presets[i].id+".jpg alt=kuva><br><br>"
+/*
 for(var j = 0; j < data.cameraStations[i].cameraPresets.length; j++) {
   if (data.cameraStations[i].cameraPresets[j].presentationName == "Tie 3 Tampereelle" || data.cameraStations[i].cameraPresets[j].presentationName == "Tie 3")
 {
@@ -73,7 +77,7 @@ for(var j = 0; j < data.cameraStations[i].cameraPresets.length; j++) {
                       "<img class=\"kamerat\" src=" + asema.cameraPresets[j].imageUrl + "><br><br>";
   }
 
-}
+}*/
 }
 
 // teksti-muuttujan sisällön tulostus 
