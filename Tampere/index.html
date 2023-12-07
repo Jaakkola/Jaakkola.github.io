@@ -30,7 +30,7 @@
 var taulukko = [];  //tulostettava sää-tieto kerätään tähän taulukkoon
 
  // Helsingin sää
- fetch('https://api.openweathermap.org/data/2.5/weather?lang=fi&q=Helsinki&units=metric&APPID=0dc18e5ebd87f5f6e3aa1c222f6daa32')
+ fetch('https://cors-anywhere.herokuapp.com/https://api.openweathermap.org/data/2.5/weather?lang=fi&q=Helsinki&units=metric&APPID=0dc18e5ebd87f5f6e3aa1c222f6daa32')
 
 // Muunnetaan vastaus JSON muotoon
  .then(function (response) {
@@ -48,7 +48,7 @@ document.getElementById("vastaus").innerHTML =
 })
 
  // Tampereen sää
- fetch('http://api.openweathermap.org/data/2.5/weather?lang=fi&q=Tampere&units=metric&APPID=0dc18e5ebd87f5f6e3aa1c222f6daa32')
+ fetch('https://cors-anywhere.herokuapp.com/http://api.openweathermap.org/data/2.5/weather?lang=fi&q=Tampere&units=metric&APPID=0dc18e5ebd87f5f6e3aa1c222f6daa32')
 
 // Muunnetaan vastaus JSON muotoon
  .then(function (response) {
