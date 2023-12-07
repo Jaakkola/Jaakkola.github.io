@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Junalla Tampereelle</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="tyyli.css">
+
+</head>
+<body>
+
+<div class="topnav" id="myTopnav">
+  <a href="index.html" >Sää</a>
+  <a href="tampere.html">Tapahtumat</a>
+  <a href="liikenne.html">Liikennekameakuvat</a>
+  <a href="aikataulu,html" class="active">Juna-aikataulu</a>
+  <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+    <i class="fa fa-bars"></i>
+  </a>
+</div>
+
+<div style="padding-left:16px">
+  <h1>Mennäänkö junalla Tampereelle?</h1>
+  <p>Kuinkahan usein junia menee? </p>
+</div>
+
+<div id="vastaus"></div>
+        
+    <script>
+     
+     fetch('https://rata.digitraffic.fi/api/v1/live-trains/station/HKI?departing_trains=100&include_nonstopping=false')
+
+// Muunnetaan vastaus JSON muotoon
+     .then(function (response) {
+return response.json();
+})
+
+// Käsitellään muunnettu (eli JSON muotoinen) vastaus
+.then(function (responseJson) {
+        
+// Kutsutaan funktiota ja välitetään sille json-vastaus 
+aikataulu(responseJson)
+})
+
+// Jos tuli jokin virhe
+	.catch(function (error) {
+document.getElementById("vastaus").innerHTML = 
+"<p>Tietoa ei pystytä hakemaan </p>"+ error;
+})
+function jsonCallback(json){
+  console.log(json);
+}
+function aikataulu(data){
+var teksti = ""; // määritellään muuttuja, johon tulostettava tieto kerätään
+
+        
+teksti = teksti + "<ul>"
+
+for(var i = 0; i < data.length; i++) {
+    for(var j = 0; j < data[i].timeTableRows.length; j++) {
+
+        if (data[i].timeTableRows[j].stationShortCode=="TPE" && data[i].timeTableRows[0].stationShortCode=="HKI"){
+          if (data[i].timeTableRows[j].type=="ARRIVAL"){
+            var pvm1 = data[i].timeTableRows[0].scheduledTime;
+            var pvm2 = data[i].timeTableRows[j].scheduledTime;
+            var u1pvm = pvm1.substr(0, 10) + " kello: " + pvm1.substr(11,5);	
+            var u2pvm = pvm2.substr(0, 10) + " kello: " + pvm2.substr(11,5);
+        
+    teksti = teksti + "<hr><h4> Juna nro " + data[i].trainNumber +  "</h4><p>Junan tyypi: " + data[i].trainType+"<p>Lähtee Helsingistä "+u1pvm+". Saapuu Tampereelle "+ u2pvm  ;
+    }
+}
+}
+
+// teksti-muuttujan sisällön tulostus 
+document.getElementById("vastaus").innerHTML = teksti;
+}}
+
+function myFunction() {
+  var x = document.getElementById("myTopnav");
+  if (x.className === "topnav") {
+    x.className += " responsive";
+  } else {
+    x.className = "topnav";
+  }
+}
+</script>
+
+</body>
+</html>
+

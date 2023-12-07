@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Tampereella tapahtuu</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="tyyli.css">
+
+</head>
+</head>
+<body>
+
+<div class="topnav" id="myTopnav">
+  <a href="index.html">Sää</a>
+  <a href="tampere.html" class="active">Tapahtumat</a>
+  <a href="liikenne.html">Liikennekamerakuvat</a>
+  <a href="aikataulu">Juna-aikataulu</a>
+  <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+    <i class="fa fa-bars"></i>
+  </a>
+</div>
+
+<div style="padding-left:16px">
+  <h1>Tampereen tapahtumapaikkoja</h1>
+  <p></p>
+</div>
+<div id="vastaus"></div>
+        
+    <script>
+        /* länsiväylä 51, kehä 3 50, turuntie 1, vanha turuntie 110 */
+     
+     fetch('https://visittampere.fi/api/v1/event')
+
+// Muunnetaan vastaus JSON muotoon
+     .then(function (response) {
+return response.json();
+})
+
+// Käsitellään muunnettu (eli JSON muotoinen) vastaus
+.then(function (responseJson) {
+        
+// Kutsutaan funktiota ja välitetään sille json-vastaus 
+tapahtumat(responseJson)
+         
+})
+
+// Jos tuli jokin virhe
+	.catch(function (error) {
+document.getElementById("vastaus").innerHTML = 
+"<p>Tietoa ei pystytä hakemaan </p>"+ error;
+})
+function jsonCallback(json){
+  console.log(json);
+}
+       function tapahtumat(data){
+var teksti = ""; 
+
+for(var i = 0; i < data.length; i++) { 
+    teksti = teksti + "<h3>" + data[i].title + "</h3>";
+    teksti = teksti + data[i].description + "<br>";
+    
+     if (data[i].contact_info.address !== null){
+    teksti = teksti + "<i>"+ data[i].contact_info.address + "</i><br><br>";
+     }
+
+    /* kuvien url-osoite hieman ongelmallinen
+    if (data[i].image !== undefined) {
+    var kuva =  data[i].image.src;
+    teksti = teksti + "<img src="+kuva+" style=width:300px><br>"
+    }*/
+   
+}
+// teksti-muuttujan sisällön tulostus 
+document.getElementById("vastaus").innerHTML = teksti;
+}
+
+         
+
+        
+
+
+function myFunction() {
+  var x = document.getElementById("myTopnav");
+  if (x.className === "topnav") {
+    x.className += " responsive";
+  } else {
+    x.className = "topnav";
+  }
+}
+</script>
+
+</body>
+</html>
+

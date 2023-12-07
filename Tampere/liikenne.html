@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Junalla Tampereelle</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="tyyli.css">
+  <style>
+   img {width:100%;
+        min-width:300px;
+        max-width:800px;}
+
+  </style>
+</head>
+<body>
+
+<div class="topnav" id="myTopnav">
+  <a href="index.html">Sää</a>
+  <a href="tampere.html">Tapahtumat</a>
+  <a href="liikenne.html" class="active">Liikennekamerakuvat</a>
+  <a href="aikataulu">Juna-aikataulu</a>
+  <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+    <i class="fa fa-bars"></i>
+  </a>
+</div>
+
+<div style="padding-left:16px">
+  <h1>Autolla Tampereslle</h1>
+  <p>Minkälainen keli siellä on?</p>
+</div>
+
+<div id="vastaus"></div>
+        
+<script>
+    /* länsiväylä 51, kehä 3 50, turuntie 1, vanha turuntie 110 */
+ 
+ fetch('https://tie.digitraffic.fi/api/v1/data/camera-data')
+
+// Muunnetaan vastaus JSON muotoon
+ .then(function (response) {
+return response.json();
+})
+
+// Käsitellään muunnettu (eli JSON muotoinen) vastaus
+.then(function (responseJson) {
+    
+// Kutsutaan funktiota ja välitetään sille json-vastaus 
+kuvat(responseJson)
+})
+
+// Jos tuli jokin virhe
+.catch(function (error) {
+document.getElementById("vastaus").innerHTML = 
+"<p>Tietoa ei pystytä hakemaan </p>"+ error;
+})
+function jsonCallback(json){
+console.log(json);
+}
+   function kuvat(data){
+var teksti = ""; 
+
+for(var i = 0; i < data.cameraStations.length; i++) { 
+//teksti = teksti + data.cameraStations[i].id;
+var asema = data.cameraStations[i];
+for(var j = 0; j < data.cameraStations[i].cameraPresets.length; j++) {
+  if (data.cameraStations[i].cameraPresets[j].presentationName == "Tie 3 Tampereelle" || data.cameraStations[i].cameraPresets[j].presentationName == "Tie 3")
+{
+                     
+                      teksti = teksti +"<h3>" + asema.cameraPresets[j].presentationName + "</h3>"+
+                     "<i>" + asema.cameraPresets[j].measuredTime + "</i><br>"+
+                      asema.cameraPresets[j].imageUrl+"<br>"+
+                      "<img class=\"kamerat\" src=" + asema.cameraPresets[j].imageUrl + "><br><br>";
+  }
+
+}
+}
+
+// teksti-muuttujan sisällön tulostus 
+document.getElementById("vastaus").innerHTML = teksti;
+}
+
+     
+function myFunction() {
+  var x = document.getElementById("myTopnav");
+  if (x.className === "topnav") {
+    x.className += " responsive";
+  } else {
+    x.className = "topnav";
+  }
+}
+</script>
+
+</body>
+</html>
+

@@ -1,1 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="tyyli.css">
+
+</head>
+<body>
+
+<div class="topnav" id="myTopnav">
+  <a href="index.html" class="active">Sää</a>
+  <a href="tampere.html">Tapahtumat</a>
+  <a href="liikenne.html">Liikennekamerakuvat</a>
+  <a href="aikataulu.html">Juna-aikataulu</a>
+  <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+    <i class="fa fa-bars"></i>
+  </a>
+</div>
+
+<div style="padding-left:16px">
+  <h1>Sää - siitä aina on jotain kerrottavaa</h1>
+  <p>Millainen sää Helsingissä on? Entä Tampereella?</p>
+</div>
+
+<div id="vastaus"></div>
+        
+<script>
+var taulukko = [];  //tulostettava sää-tieto kerätään tähän taulukkoon
+
+ // Helsingin sää
+ fetch('http://api.openweathermap.org/data/2.5/weather?lang=fi&q=Helsinki&units=metric&APPID=0dc18e5ebd87f5f6e3aa1c222f6daa32')
+
+// Muunnetaan vastaus JSON muotoon
+ .then(function (response) {
+return response.json();
+})
+// Käsitellään muunnettu (eli JSON muotoinen) vastaus
+.then(function (responseJson) {  
+// Kutsutaan funktiota ja välitetään sille json-vastaus 
+saa(responseJson)
+})
+// Jos tuli jokin virhe
+.catch(function (error) {
+document.getElementById("vastaus").innerHTML = 
+"<p>Tietoa ei pystytä hakemaan </p>"+ error;
+})
+
+ // Tampereen sää
+ fetch('http://api.openweathermap.org/data/2.5/weather?lang=fi&q=Tampere&units=metric&APPID=0dc18e5ebd87f5f6e3aa1c222f6daa32')
+
+// Muunnetaan vastaus JSON muotoon
+ .then(function (response) {
+return response.json();
+})
+// Käsitellään muunnettu (eli JSON muotoinen) vastaus
+.then(function (responseJson) {  
+// Kutsutaan funktiota ja välitetään sille json-vastaus 
+saa(responseJson)
+})
+// Jos tuli jokin virhe
+.catch(function (error) {
+document.getElementById("vastaus").innerHTML = 
+"<p>Tietoa ei pystytä hakemaan </p>"+ error;
+})
+
+
+
+function saa(data){
+
+// otsikkotiedon hakeminen ja sijoittaminen h1-elementtiin
+taulukko.push("<div style=display:inline-block;margin:10px;>"); // tulostus omaan lohkoon
+
+taulukko.push("<ul>"); // lista alkaa
+taulukko.push("<li>kaupunki: "+data.name+"</li>");
+taulukko.push("<li>kuvaus: "+data.weather[0].description+"</li>");
+taulukko.push("<li>lämpötila: "+data.main.temp+"&deg;C</li>");
+taulukko.push("<li>tuulen nopeus: "+data.wind.speed+" m/s</li>");
+taulukko.push("</ul>");
+
+// kuva urö-soitteen hakeminen
+var kuva = 'http://openweathermap.org/img/w/' + data.weather[0].icon + '.png';
+// kuvan tulostus sivulle
+taulukko.push("<p style=text-align:center><img src='" + kuva + "' alt='kuva' ></p>");
+
+taulukko.push("</div>");
+
+
+// taulukon solujen yhdistäminen & sisällön tulostus 
+document.getElementById("vastaus").innerHTML = taulukko.join(" ");
+}
+
+     
+
+function myFunction() {
+  var x = document.getElementById("myTopnav");
+  if (x.className === "topnav") {
+    x.className += " responsive";
+  } else {
+    x.className = "topnav";
+  }
+}
+</script>
+
+</body>
+</html>
 
