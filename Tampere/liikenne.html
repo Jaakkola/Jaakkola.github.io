@@ -66,18 +66,7 @@ for(var i = 0; i < data.presets.length; i++) {
 var kamera = i+ " " +data.presets[i].id;
 teksti = teksti + "<h3>" + data.presets[i].measuredTime + "</h3>";
 teksti = teksti + "<img class=kamerat src=https://weathercam.digitraffic.fi/" + data.presets[i].id+".jpg alt=kuva><br><br>"
-/*
-for(var j = 0; j < data.cameraStations[i].cameraPresets.length; j++) {
-  if (data.cameraStations[i].cameraPresets[j].presentationName == "Tie 3 Tampereelle" || data.cameraStations[i].cameraPresets[j].presentationName == "Tie 3")
-{
-                     
-                      teksti = teksti +"<h3>" + asema.cameraPresets[j].presentationName + "</h3>"+
-                     "<i>" + asema.cameraPresets[j].measuredTime + "</i><br>"+
-                      asema.cameraPresets[j].imageUrl+"<br>"+
-                      "<img class=\"kamerat\" src=" + asema.cameraPresets[j].imageUrl + "><br><br>";
-  }
 
-}*/
 }
 
 // teksti-muuttujan sisällön tulostus 
@@ -97,4 +86,5 @@ function myFunction() {
 
 </body>
 </html>
+
 
