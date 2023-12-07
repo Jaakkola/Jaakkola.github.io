@@ -31,7 +31,7 @@
     <script>
         /* länsiväylä 51, kehä 3 50, turuntie 1, vanha turuntie 110 */
      
-     fetch('https://visittampere.fi/api/v1/event')
+     fetch('https://api.visittampere.com/api/v1/visittampere/map/?category=breweries_distilleries&lang=fi')
 
 // Muunnetaan vastaus JSON muotoon
      .then(function (response) {
@@ -57,10 +57,11 @@ function jsonCallback(json){
        function tapahtumat(data){
 var teksti = ""; 
 
-for(var i = 0; i < data.length; i++) { 
-    teksti = teksti + "<h3>" + data[i].title + "</h3>";
-    teksti = teksti + data[i].description + "<br>";
-    
+for(var i = 0; i < data.features.length; i++) { 
+ 
+    teksti = teksti + "<h3>" + data.features[i].properties.name + "</h3>";
+   teksti = teksti + "<a href=''>"+ data.features[i].properties.webshop_url+ "</a><br>";
+    /*
      if (data[i].contact_info.address !== null){
     teksti = teksti + "<i>"+ data[i].contact_info.address + "</i><br><br>";
      }
@@ -71,7 +72,7 @@ for(var i = 0; i < data.length; i++) {
     teksti = teksti + "<img src="+kuva+" style=width:300px><br>"
     }*/
    
-}
+  }
 // teksti-muuttujan sisällön tulostus 
 document.getElementById("vastaus").innerHTML = teksti;
 }
@@ -93,4 +94,5 @@ function myFunction() {
 
 </body>
 </html>
+
 
