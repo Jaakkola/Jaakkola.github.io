@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="fi">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+         <title>JSON-harjoitus</title>
+       <link href="tyyli.css" rel="stylesheet">
+    </head>
+    <body>
+        <section class="stage">
+            <div id="home" class="div"><p id="homep" class="p">
+                <a href="index.html">Etusivu</a>
+            </p></div>
+            <div class="div" id="about"><p class="p">
+                <a href="digi.html">Digi&nbsp;Cafe</a></p>
+            </div>
+            <div class="div" id="contact"><p class="p">
+                <a href="palaveri.html">palaveri</a>
+            </p>
+            </div>
+            <div class="div" id="gallery"><p class="p">
+                <a href="tyopaikat.html">Työpaikat</a></p>
+            </div>
+          </section>  
+          <div id="vastaus"></div>  
+
+          <script>
+            fetch('https://run.mocky.io/v3/83dd7db7-04fa-4a4c-a71a-d3800404b751') 
+            // Muunnetaan vastaus JSON muotoon 
+            .then(function (response) {
+                return response.json();
+            })
+            // Käsitellään muunnettu (eli JSON muotoinen) vastaus
+            .then(function (responseJson) {
+                // Kutsutaan funktiota ja välitetään sille json-vastaus 
+                digi(responseJson);
+            })
+            // Jos tuli jokin virhe
+            .catch(function (error) {
+                document.getElementById("vastaus").innerHTML = "<p>Tietoa ei pystytä hakemaan</p>"; })
+            
+            function digi(data){
+                var teksti = "";
+                teksti = "<h1>"+ data.yritys + "</h1>";
+                teksti = teksti + "<p>Osoite: " + data.yhteystiedot.osoite + "<br>";
+                teksti = teksti + "Puhelin: "+ data.yhteystiedot.puhelin + "<br>";
+                teksti = teksti + "Sähköposti: "+data.yhteystiedot.email+"</p>";
+                teksti = teksti + "<h3>Tuotteet</h3><ul>";
+                for (var i=0; i<data.tuotteet.length; i++){
+                    teksti = teksti + "<li>" + data.tuotteet[i] + "</li>"
+                }
+                teksti = teksti + "</ul>";
+                teksti = teksti + "<h3>Henkilökunta</h3>"
+
+                //objektitaulukko
+                for (var i=0; i<data.henkilokunta.length; i++){
+                    teksti = teksti + "<p>" + data.henkilokunta[i].nimi + ", "+ data.henkilokunta[i].titteli+"</p>";
+                }
+                document.getElementById("vastaus").innerHTML = teksti;
+            }
+            
+            </script>
+    </body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="fi">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+         <title>JSON-harjoitus</title>
+       <link href="tyyli.css" rel="stylesheet">
+    </head>
+    <body>
+        <section class="stage">
+            <div id="home" class="div"><p id="homep" class="p">
+                <a href="index.html">Etusivu</a>
+            </p></div>
+            <div class="div" id="about"><p class="p">
+                <a href="digi.html">Digi&nbsp;Cafe</a></p>
+            </div>
+            <div class="div" id="contact"><p class="p">
+                <a href="palaveri.html">palaveri</a>
+            </p>
+            </div>
+            <div class="div" id="gallery"><p class="p">
+                <a href="tyopaikat.html">Työpaikat</a></p>
+            </div>
+          </section>  
+          <div id="vastaus"></div>  
+
+          <script>
+            fetch('https://run.mocky.io/v3/98b5e4bb-05df-416a-9e0b-497b1c496a95') 
+            // Muunnetaan vastaus JSON muotoon 
+            .then(function (response) {
+                return response.json();
+            })
+            // Käsitellään muunnettu (eli JSON muotoinen) vastaus
+            .then(function (responseJson) {
+                // Kutsutaan funktiota ja välitetään sille json-vastaus 
+                palaveri(responseJson);
+            })
+            // Jos tuli jokin virhe
+            .catch(function (error) {
+                document.getElementById("vastaus").innerHTML = "<p>Tietoa ei pystytä hakemaan</p>"; })
+            
+            function palaveri(data){
+                var teksti = "";
+                teksti = teksti + "<h1>"+ data.aihe + "</h1>";
+                teksti = teksti + "<p>Osallistujien lukumäärä: " + data.osallistujien_lkm + "</p>";
+                 teksti = teksti + "<h3>Osallistujat</h3><ul>";
+                for (var i=0; i<data.osallistujat.length; i++){
+                    teksti = teksti + "<li>" + data.osallistujat[i].etunimi + " " +data.osallistujat[i].sukunimi+ "</li>"
+                }
+                teksti = teksti + "</ul>";
+                teksti = teksti + "<h3>Paikka ja aika</h3>";
+                teksti = teksti + "<p>paikka: "+ data.paikka + "<br>";
+                teksti = teksti + "aika: " + data.aika.pvm + ", klo "+ data.aika.klo+", kesto "+data.aika.kesto+"</p>";
+               
+                document.getElementById("vastaus").innerHTML = teksti;
+            }
+            
+            </script>
+    </body>
+</html>
