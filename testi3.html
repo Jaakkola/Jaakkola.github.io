@@ -16,12 +16,14 @@
       img {width:100%;
           max-width: 600px;}
       .grid-container { display: grid;
-                       grid-template-columns: auto auto;
+                       grid-template-columns: auto auto auto;
                        padding: 10px;
                     }
 
      @media (max-width:600px){
-       
+        .grid-container {
+                       grid-template-columns: auto;
+                    }
      }
     </style>
   </head>
@@ -46,7 +48,9 @@
         <section>
           <img src= "kahvi1.jpg" alt="kahvikuppi">
         </section>
-       
+        <section>
+          <img src= "kahvi1.jpg" alt="kahvikuppi">
+        </section>
     </article>
     <footer>Sivun alaosa</footer>
   </body>
