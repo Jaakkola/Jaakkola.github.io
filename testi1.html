@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="fi">
+  <head>
+    <!-- komentti: koodisto-->
+    <meta charset="utf-8">
+
+    <!-- skaalaa sivun käyttäjän päätelaitteen resoluution mukaan-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+
+    <title>Layoutin testausta</title>
+    
+    <style>
+      img {width:100%;
+          max-width: 600px;}
+     .osa1 {width:30%; 
+            float:left;
+            }
+     .osa2 {width:30%;
+            float:left;}
+     .osa3 {width:30%;
+            float:left;}
+     footer {clear:both; /* lopettaa float:n vaikutuksen */
+             border-top: 2px dotted pink;} /*alueen yläreunaviiva */
+     @media (max-width:600px){
+         .osa1, .osa2, .osa3 {width:100%; 
+                       clear: both;}
+     }
+    </style>
+  </head>
+  <body>
+    <header>
+        <h1>Asetteluharjoitus</h1>
+        </header>
+        <article>
+        <section class="osa1">
+        <h3>Lorem ipsum</h3>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer non pellentesque
+        magna. In leo lacus, euismod eu urna scelerisque, rutrum congue magna. Aliquam non
+        enim scelerisque, fermentum augue vel, egestas lacus. Pellentesque luctus vestibulum ipsum
+        id rutrum. Aliquam erat volutpat. Pellentesque id lobortis purus. Etiam rhoncus, risus lobortis
+        consequat tempus, orci mi gravida mi, nec porttitor purus orci vel nisi. Vestibulum
+        sollicitudin congue felis, sed placerat lorem suscipit ac. Phasellus eu porta enim. Vivamus et
+        eros enim. Morbi pretium bibendum erat eget tincidunt. Cras eu vehicula urna, eu placerat
+        lacus. Pellentesque quis pulvinar ex. Ut venenatis risus tortor, accumsan iaculis enim semper
+        sed. Donec et tincidunt odio. Aenean hendrerit eros et auctor lobortis.
+        <p>
+        </section>
+        <section class="osa2">
+        <img src= "kahvilakuvat/kahvi1.jpg" alt="kahvikuppi">
+        </section>
+        <section class="osa3">
+            <img src= "kahvilakuvat/kahvi2.jpg" alt="kahvikuppi">
+        </section>
+        </article>
+        <footer>Sivun alaosa</footer>
+  </body>
+</html>
