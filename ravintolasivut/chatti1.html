@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chatti</title>
+</head>
+<body>
+<h1 id="otsikko"></h1>
+<form>
+<label>Viesti:</label><br>
+<textarea id="viesti"></textarea>
+<button onclick="kerro()">Lähetä</button>
+</form>
+<h3>Viestit</h3>
+<div id="viestiketju"></div>
+
+
+<script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.7/firebase-app.js";
+  import { getDatabase } from "https://www.gstatic.com/firebasejs/9.6.7/firebase-database.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.6.7/firebase-analytics.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  const firebaseConfig = {
+    apiKey: "AIzaSyCWOAF9vVg5LD2jVYkLvZRXxufKJMeuHJw",
+    authDomain: "chatti-7c707.firebaseapp.com",
+    projectId: "chatti-7c707",
+    storageBucket: "chatti-7c707.appspot.com",
+    messagingSenderId: "24960496451",
+    appId: "1:24960496451:web:28083ff2d6c6e7c377b5f6",
+    measurementId: "G-5C6JYK9ZWY"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const database = getDatabase();
+  const analytics = getAnalytics(app);
+
+
+
+  // var fireHeading = document.getElementById("otsikko");
+     // Initialize Firebase
+ //firebase.initializeApp(firebaseConfig);
+ 
+
+ //var firebaseRef = firebase.database();
+  
+// otsikon hakeminen firebasesta
+   
+var fireHeading = document.getElementById("otsikko");
+var firebaseHeadingRef = firebase.database().ref().child("heading"); 
+
+firebaseHeadingRef.on('value', function(datasnapshot){ fireHeading.innerText=datasnapshot.val(); }); 
+
+
+ function kerro(){
+   
+   // tekstin tallennus
+   
+   var firebaseRef = firebase.database().ref();
+   var lahettaja = document.getElementById("nimi").value;
+   var teksti = document.getElementById("viesti").value;
+   firebaseRef.child("viestit").push().set({
+       nimi: lahettaja,
+       viesti: teksti
+   })
+
+
+ // tietojen hakeminen firebasesta
+   
+   var rootRef = firebase.database().ref().child('viestit');
+   rootRef.on('child_added', snap =>
+       {
+        var nimi = snap.child("nimi").val();
+        var viesti = snap.child("viesti").val(); 
+   document.getElementById("viestiketju").innerHTML="<p>"+ nimi + ": " + viesti + "</p>"; 
+}
+);
+ 
+}
+</script>
+
+</body>
+</html>
