@@ -23,9 +23,47 @@
             </div>
           </section>  
           <div id="vastaus"></div>  
+         
 
           <script>
-            fetch('https://run.mocky.io/v3/98b5e4bb-05df-416a-9e0b-497b1c496a95') 
+            fetch('https://jaakkola.github.io/oppi4/palaveri.json') 
+            // Muunnetaan vastaus JSON muotoon 
+            .then(function (response) {
+                return response.json();
+            })
+            // Käsitellään muunnettu (eli JSON muotoinen) vastaus
+            .then(function (responseJson) {
+                // Kutsutaan funktiota ja välitetään sille json-vastaus 
+                digi(responseJson);
+            })
+            // Jos tuli jokin virhe
+            .catch(function (error) {
+                document.getElementById("vastaus").innerHTML = "<p>Tietoa ei pystytä hakemaan</p>"; })
+            
+            function digi(data){
+                var teksti = "";
+                teksti = "<h1>"+ data.aihe + "</h1>";
+                teksti = teksti + "<p>Osoite: " + data.yhteystiedot.osoite + "<br>";
+                teksti = teksti + "Puhelin: "+ data.yhteystiedot.puhelin + "<br>";
+                teksti = teksti + "Sähköposti: "+data.yhteystiedot.email+"</p>";
+                teksti = teksti + "<h3>Tehtävät</h3><ul>";
+                for (var i=0; i<data.tehtävät.length; i++){
+                    teksti = teksti + "<li>" + data.tehtävät[i] + "</li>"
+                }
+                teksti = teksti + "</ul>";
+                teksti = teksti + "<h3>Osallistujat</h3>"
+
+                //objektitaulukko
+                for (var i=0; i<data.osallistujat.length; i++){
+                    teksti = teksti + "<p>" + data.osallistujat[i].nimi + "</p>";
+                }
+                document.getElementById("vastaus").innerHTML = teksti;
+            }
+            
+            </script>
+
+          <script>
+            fetch('') 
             // Muunnetaan vastaus JSON muotoon 
             .then(function (response) {
                 return response.json();
