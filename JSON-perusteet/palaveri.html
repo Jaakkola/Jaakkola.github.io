@@ -43,9 +43,7 @@
             function digi(data){
                 var teksti = "";
                 teksti = "<h1>"+ data.aihe + "</h1>";
-                teksti = teksti + "<p>Osoite: " + data.yhteystiedot.osoite + "<br>";
-                teksti = teksti + "Puhelin: "+ data.yhteystiedot.puhelin + "<br>";
-                teksti = teksti + "Sähköposti: "+data.yhteystiedot.email+"</p>";
+                teksti = teksti + "<p>Paikka: " + data.sijainti + "<br>";
                 teksti = teksti + "<h3>Tehtävät</h3><ul>";
                 for (var i=0; i<data.tehtävät.length; i++){
                     teksti = teksti + "<li>" + data.tehtävät[i] + "</li>"
