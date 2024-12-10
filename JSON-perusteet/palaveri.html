@@ -34,13 +34,13 @@
             // Käsitellään muunnettu (eli JSON muotoinen) vastaus
             .then(function (responseJson) {
                 // Kutsutaan funktiota ja välitetään sille json-vastaus 
-                digi(responseJson);
+                palaveri(responseJson);
             })
             // Jos tuli jokin virhe
             .catch(function (error) {
                 document.getElementById("vastaus").innerHTML = "<p>Tietoa ei pystytä hakemaan</p>"; })
             
-            function digi(data){
+            function palaveri(data){
                 var teksti = "";
                 teksti = "<h1>"+ data.aihe + "</h1>";
                 teksti = teksti + "<p>Paikka: " + data.sijainti + "<br>";
@@ -60,37 +60,6 @@
             
             </script>
 
-          <script>
-            fetch('') 
-            // Muunnetaan vastaus JSON muotoon 
-            .then(function (response) {
-                return response.json();
-            })
-            // Käsitellään muunnettu (eli JSON muotoinen) vastaus
-            .then(function (responseJson) {
-                // Kutsutaan funktiota ja välitetään sille json-vastaus 
-                palaveri(responseJson);
-            })
-            // Jos tuli jokin virhe
-            .catch(function (error) {
-                document.getElementById("vastaus").innerHTML = "<p>Tietoa ei pystytä hakemaan</p>"; })
-            
-            function palaveri(data){
-                var teksti = "";
-                teksti = teksti + "<h1>"+ data.aihe + "</h1>";
-                teksti = teksti + "<p>Osallistujien lukumäärä: " + data.osallistujien_lkm + "</p>";
-                 teksti = teksti + "<h3>Osallistujat</h3><ul>";
-                for (var i=0; i<data.osallistujat.length; i++){
-                    teksti = teksti + "<li>" + data.osallistujat[i].etunimi + " " +data.osallistujat[i].sukunimi+ "</li>"
-                }
-                teksti = teksti + "</ul>";
-                teksti = teksti + "<h3>Paikka ja aika</h3>";
-                teksti = teksti + "<p>paikka: "+ data.paikka + "<br>";
-                teksti = teksti + "aika: " + data.aika.pvm + ", klo "+ data.aika.klo+", kesto "+data.aika.kesto+"</p>";
-               
-                document.getElementById("vastaus").innerHTML = teksti;
-            }
-            
-            </script>
+        
     </body>
 </html>
