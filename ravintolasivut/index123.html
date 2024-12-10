@@ -517,9 +517,9 @@ padding: 10px 0px;
     function varaus(){
         var nimi = document.getElementById("nimi").value;
         var sposti = document.getElementById("email").value;
-        var paiva = document.getElementById("paiva").value;
-        var aika = document.getElementById("aika").value;
-        var toive = document.getElementById("toive").value;
+        var paiva = document.getElementById("pvm").value;
+        var aika = document.getElementById("kello").value;
+        var toive = document.getElementById("toiveet").value;
         // tähän vielä muiden lomake-elementtien tietojen lukeminen samalla lailla
         // tulostetaan tiedot div-elementtii
         document.getElementById("varaustiedot").innerHTML="Kiitos varauksesta "+nimi+"<br>Sähköpostisoitteesi: "+sposti+"<br>Varaus on "+paiva+" klo "+aika + "<br>Toiveena " + toive;
@@ -540,7 +540,7 @@ padding: 10px 0px;
             }
         }
          // checkboxit
-      taulukko.push("haluaisit lisää "); 
+      taulukko.push(" Haluaisit lisää "); 
       for (var i=0, length = boxit.length; i<length; i++){
             
             if (boxit[i].checked){
