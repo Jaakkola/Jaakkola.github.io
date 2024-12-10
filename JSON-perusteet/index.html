@@ -4,26 +4,25 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
          <title>JSON-harjoitus</title>
-       <link href="tyyli.css" rel="stylesheet">
-    </head>
-    <body>
-        <section class="stage">
-            <div id="home" class="div"><p id="homep" class="p">
-                <a href="index.html">Etusivu</a>
-            </p></div>
-            <div class="div" id="about"><p class="p">
-                <a href="digi.html">Digi&nbsp;Cafe</a></p>
-            </div>
-            <div class="div" id="contact"><p class="p">
-                <a href="palaveri.html">palaveri</a>
-            </p>
-            </div>
-            <div class="div" id="gallery"><p class="p">
-                <a href="tyopaikat.html">Työpaikat</a></p>
-            </div>
-          </section>  
+               <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <link href="tyyli.css" rel="stylesheet">
+<body>
 
-          <div id="vastaus"></div>  
+<!-- navi -->
+<div class="w3-sidebar w3-light-grey w3-bar-block" style="width:25%">
+  <h3 class="w3-bar-item">Osa 1</h3>
+  <a href="index.html" class="w3-bar-item w3-button">Etusivu</a>
+  <a href="digi.html" class="w3-bar-item w3-button">Digi&nbsp;Cafe</a>
+  <a href="palaveri.html" class="w3-bar-item w3-button">Palaveri</a>
+  <a href="tyopaikat.html" class="w3-bar-item w3-button">Työpaikat</a>
+</div>
+
+<!-- sivun sisältö -->
+
+
+          <div id="vastaus" style="margin-left:25%;padding-left:20px;"></div>  
+
+        
 
           <script>
             fetch('https://jaakkola.github.io/json/digitekniikat.json') 
