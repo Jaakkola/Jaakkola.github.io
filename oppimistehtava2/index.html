@@ -1,1 +1,87 @@
+<!DOCTYPE html>
+<html lang="fi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Perus HTML -sivu</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+        color: #222;
+      }
 
+      header {
+        background-color: #2c3e50;
+        color: white;
+        padding: 1.5rem;
+      }
+
+      nav {
+        background-color: #34495e;
+        padding: 0.75rem 1.5rem;
+      }
+
+      nav a {
+        color: white;
+        text-decoration: none;
+        margin-right: 1rem;
+      }
+
+      main {
+        max-width: 960px;
+        margin: 2rem auto;
+        padding: 0 1rem;
+      }
+
+      section {
+        background-color: white;
+        padding: 1.5rem;
+        margin-bottom: 1.5rem;
+        border-radius: 8px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+      }
+
+      footer {
+        background-color: #1f2d3d;
+        color: white;
+        text-align: center;
+        padding: 1rem;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Otsikko</h1>
+    </header>
+
+    <nav>
+      <a href="#etusivu">Etusivu</a>
+      <a href="#tietoa">Tietoa</a>
+      <a href="#yhteystiedot">Yhteystiedot</a>
+    </nav>
+
+    <main>
+      <section id="etusivu">
+        <h2>Etusivu</h2>
+        <p>Tämä on perusrakenteinen HTML-sivu. Se sisältää otsikon, navigoinnin, tekstisisällön ja alatunnisteen.</p>
+      </section>
+
+      <section id="tietoa">
+        <h2>Tietoa</h2>
+        <p>HTML on verkkosivujen perusrakenne. Se koostuu elementeistä, kuten otsikoista, kappaleista, listauksista ja linkeistä.</p>
+      </section>
+
+      <section id="yhteystiedot">
+        <h2>Yhteystiedot</h2>
+        <p>Voit ottaa yhteyttä esimerkiksi sähköpostitse.</p>
+      </section>
+    </main>
+
+    <footer>
+      <p>© 2026 Perus HTML -sivu</p>
+    </footer>
+  </body>
+</html>
